@@ -1,0 +1,30 @@
+---
+title: "Palmer Penguins graph"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r penguins, include=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(plotly)
+```
+
+
+```{r graph, echo=FALSE}
+penguin_graph <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(aes(size = body_mass_g, 
+                 color = species),
+             alpha = 0.4) +
+  scale_color_manual(values = c("purple","orange","black")) +
+  theme_minimal() +
+  labs(x = "bill length (mm)",
+       y = "bill depth mm",
+       title = "Penguin measurements")
+ggplotly(penguin_graph, tooltip = c("species"))
+```
+
